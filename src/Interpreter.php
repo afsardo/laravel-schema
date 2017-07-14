@@ -7,11 +7,11 @@ class Interpreter {
     protected $connection;
 
     protected $queriesParsers = [
-        'sqlite' => \App\Schema\Interpreters\Sqlite\SqliteQueryParser::class,
+        'sqlite' => \Afsardo\Schema\Interpreters\Sqlite\SqliteQueryParser::class,
     ];
 
     protected $dumpParsers = [
-        'sqlite' => \App\Schema\Interpreters\Sqlite\SqliteDumpParser::class,
+        'sqlite' => \Afsardo\Schema\Interpreters\Sqlite\SqliteDumpParser::class,
     ];
 
     public function connection($connection) {
