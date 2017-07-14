@@ -1,5 +1,5 @@
 {
-    "name": "afsardo/schema",
+    "name": "afsardo/laravel-schema",
     "description": "Laravel Schema new migrations.",
     "keywords": ["package", "laravel", "schema", "database", "migrations"],
     "license": "MIT",
