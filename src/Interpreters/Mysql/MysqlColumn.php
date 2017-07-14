@@ -1,10 +1,10 @@
 <?php
 
-namespace Afsardo\Schema\Interpreters\Sqlite;
+namespace Afsardo\Schema\Interpreters\Mysql;
 
 use Afsardo\Schema\Interpreters\ColumnSchema;
 
-class SqliteColumn implements ColumnSchema {
+class MysqlColumn implements ColumnSchema {
 
     protected $name;
     protected $type;
@@ -12,27 +12,51 @@ class SqliteColumn implements ColumnSchema {
     protected $default;
     protected $nullable;
     protected $increments;
+    protected $unsigned;
 
     public static $dictionary = [
+        "char" => "char",
         "varchar" => "string",
         "text" => "text",
-        "integer" => "integer",
-        "float" => "float",
-        "numeric" => "decimal",
+        "mediumtext" => "mediumText",
+        "longtext" => "longText",
+        "bigint" => "bigInteger",
+        "int" => "integer",
+        "mediumint" => "mediumInteger",
+        "tinyint" => "tinyInteger",
+        "smallint" => "smallInteger",
+        "double" => "double",
+        "decimal" => "decimal",
+        "enum" => "enum",
+        "json" => "json",
         "date" => "date",
-        "datetime" => "dateTime",
+        "datetime" => "datetime",
         "time" => "time",
+        "timestamp" => "timestamp",
         "blob" => "binary",
-        "tinyint" => "boolean",
     ];
 
-    public function __construct($name, $type, $size = null, $default = null, $nullable = true, $increments = false) {
+    public function __construct($name, $type, $size = null, $default = null, $nullable = true, $increments = false, $unsigned = false) {
         $this->name = $name;
         $this->type = $type;
         $this->size = $size;
         $this->default = $default;
         $this->nullable = $nullable;
         $this->increments = $increments;
+        $this->unsigned = $unsigned;
+
+        $this->processTypeSize();
+    }
+
+    private function processTypeSize()
+    {
+        $size = explode(", ", str_replace("'", "", $this->size));
+
+        if (count($size) > 1) {
+            $this->size = $size;
+        } else {
+            $this->size = empty($size[0]) ? null : $size[0];
+        }
     }
 
     public function name()
@@ -63,7 +87,7 @@ class SqliteColumn implements ColumnSchema {
 
     public function unsigned()
     {
-        return false;
+        return $this->unsigned;
     }
 
     public function increments()
@@ -78,22 +102,22 @@ class SqliteColumn implements ColumnSchema {
 
     public function isDouble()
     {
-        return false;
+        return $this->type == "double";
     }
 
     public function isDecimal()
     {
-        return false;
+        return $this->type == "decimal";
     }
 
     public function isEnum()
     {
-        return false;
+        return $this->type == "enum";
     }
 
     public function isBoolean()
     {
-        return false;
+        return $this->type == "tinyint" && $this->default == 1;
     }
 
 }

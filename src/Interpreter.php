@@ -8,10 +8,12 @@ class Interpreter {
 
     protected $queriesParsers = [
         'sqlite' => \Afsardo\Schema\Interpreters\Sqlite\SqliteQueryParser::class,
+        'mysql' => \Afsardo\Schema\Interpreters\Mysql\MysqlQueryParser::class,
     ];
 
     protected $dumpParsers = [
         'sqlite' => \Afsardo\Schema\Interpreters\Sqlite\SqliteDumpParser::class,
+        'mysql' => \Afsardo\Schema\Interpreters\Mysql\MysqlDumpParser::class,
     ];
 
     public function connection($connection) {
