@@ -22,7 +22,6 @@ There is alot to do for this package to be officially launched.
 - Editing columns
 - Make migration command overwrite
 - Database cleanup command (NEW COMMAND)
-- Needs to support MySQL  
 - Needs to support PostgreSQL
 - Needs to support SQLserver
 - Add tests
