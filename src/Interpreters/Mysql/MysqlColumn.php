@@ -4,8 +4,8 @@ namespace Afsardo\Schema\Interpreters\Mysql;
 
 use Afsardo\Schema\Interpreters\ColumnSchema;
 
-class MysqlColumn implements ColumnSchema {
-
+class MysqlColumn implements ColumnSchema
+{
     protected $name;
     protected $type;
     protected $size;
@@ -30,13 +30,14 @@ class MysqlColumn implements ColumnSchema {
         "enum" => "enum",
         "json" => "json",
         "date" => "date",
-        "datetime" => "datetime",
+        "datetime" => "dateTime",
         "time" => "time",
         "timestamp" => "timestamp",
         "blob" => "binary",
     ];
 
-    public function __construct($name, $type, $size = null, $default = null, $nullable = true, $increments = false, $unsigned = false) {
+    public function __construct($name, $type, $size = null, $default = null, $nullable = true, $increments = false, $unsigned = false)
+    {
         $this->name = $name;
         $this->type = $type;
         $this->size = $size;
@@ -66,7 +67,6 @@ class MysqlColumn implements ColumnSchema {
 
     public function type()
     {
-
         return self::$dictionary[$this->type];
     }
 
@@ -117,7 +117,6 @@ class MysqlColumn implements ColumnSchema {
 
     public function isBoolean()
     {
-        return $this->type == "tinyint" && $this->default == 1;
+        return $this->type == "tinyint" && $this->size == 1;
     }
-
 }
