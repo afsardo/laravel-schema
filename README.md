@@ -36,4 +36,4 @@ There is alot to do for this package to be officially launched.
 
 # In Action
 
-![In Action](http://g.recordit.co/u9BBMq3R61.gif)
+![In Action](http://g.recordit.co/DoO68s4YPT.gif)
