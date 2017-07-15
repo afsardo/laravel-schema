@@ -25,3 +25,17 @@ There is alot to do for this package to be officially launched.
 - Needs to support PostgreSQL
 - Needs to support SQLserver
 - Add tests
+
+## Instalation:
+
+#### Step 1
+![Step 1](http://g.recordit.co/azLoieNytU.gif)
+
+#### Step 2
+![Step 2](http://g.recordit.co/u9BBMq3R61.gif)
+
+## In Action
+
+![In Action](http://g.recordit.co/DoO68s4YPT.gif)
+
+![In Action 2](http://g.recordit.co/410jwPSE68.gif)
