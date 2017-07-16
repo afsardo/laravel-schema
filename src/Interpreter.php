@@ -2,31 +2,34 @@
 
 namespace Afsardo\Schema;
 
-class Interpreter {
-    
+class Interpreter
+{
     protected $connection;
 
-    protected $queriesParsers = [
+    public static $queriesParsers = [
         'sqlite' => \Afsardo\Schema\Interpreters\Sqlite\SqliteQueryParser::class,
         'mysql' => \Afsardo\Schema\Interpreters\Mysql\MysqlQueryParser::class,
     ];
 
-    protected $dumpParsers = [
+    public static $dumpParsers = [
         'sqlite' => \Afsardo\Schema\Interpreters\Sqlite\SqliteDumpParser::class,
         'mysql' => \Afsardo\Schema\Interpreters\Mysql\MysqlDumpParser::class,
     ];
 
-    public function connection($connection) {
+    public function connection($connection)
+    {
         $this->connection = $connection;
 
         return $this;
     }
 
-    public function fromQueries($queries) {
+    public function fromQueries($queries)
+    {
         return $this->resolveQueriesParser($queries)->parse();
     }
 
-    public function fromDump($dump) {
+    public function fromDump($dump)
+    {
         return $this->resolveDumpParser($dump)->parse();
     }
 
@@ -44,5 +47,4 @@ class Interpreter {
     {
         return $this->connection->getDriverName();
     }
-    
 }
