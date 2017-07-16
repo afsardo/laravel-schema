@@ -35,12 +35,12 @@ class Interpreter
 
     private function resolveQueriesParser($query)
     {
-        return new $this->queriesParsers[$this->connectionDriver()]($this->connection, $query);
+        return new static::$queriesParsers[$this->connectionDriver()]($this->connection, $query);
     }
 
     private function resolveDumpParser($dump)
     {
-        return new $this->dumpParsers[$this->connectionDriver()]($this->connection, $dump);
+        return new static::$dumpParsers[$this->connectionDriver()]($this->connection, $dump);
     }
 
     private function connectionDriver()

@@ -31,12 +31,33 @@ class InterpreterTest extends TestCase
         }
     }
 
-    // /** @test */
-    // public function it_resolves_a_table_from_sqlite_queries()
-    // {
-    //     $interpreter = (new Interpreter)->connection($this->createSqliteConnection());
-    //     $table = $interpreter->fromQueries([
-    //         ["query" => ""]
-    //     ]);
-    // }
+    /** @test */
+    public function it_resolves_a_table_from_sqlite_queries()
+    {
+        $interpreter = (new Interpreter)->connection($this->createSqliteConnection());
+        $table = $interpreter->fromQueries([
+            [
+                "query" => 'create table "users" ("id" integer not null primary key autoincrement, "name" varchar not null, "email" varchar not null, "password" varchar not null, "remember_token" varchar null, "created_at" datetime null, "updated_at" datetime null)'
+            ],
+            [
+                "query" => 'create unique index "users_email_unique" on "users" ("email")'
+            ],
+        ]);
+
+        $this->assertEquals(7, $table->countColumns());
+        $this->assertFalse($table->toDrop());
+    }
+
+    /** @test */
+    public function it_resolves_a_to_drop_table_from_sqlite_queries()
+    {
+        $interpreter = (new Interpreter)->connection($this->createSqliteConnection());
+        $table = $interpreter->fromQueries([
+            [
+                "query" => 'drop table if exists "users"'
+            ],
+        ]);
+
+        $this->assertTrue($table->toDrop());
+    }
 }
